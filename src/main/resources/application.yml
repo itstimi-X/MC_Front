@@ -1,0 +1,33 @@
+
+spring:
+  profiles:
+    active: local
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
+      add-mappings: true
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+    cache: false
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      charset: UTF-8
+    session:
+      tracking-modes: cookie
+      timeout: 604800 #7?
+  ssl:
+    key-store-type: PKCS12
+    key-store: /Users/timi/Documents/GitHub/mc_front/src/main/resources/ssl/keystore.p12
+    key-store-password: acrofuture
+    key-alias: tomcat
+  port: 8080
