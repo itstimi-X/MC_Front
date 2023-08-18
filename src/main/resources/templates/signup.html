@@ -13,6 +13,11 @@
           background-color: #C6AEC7; /* Darkened Thistle color when hovered */
           color: white;
         }
+        .btn-disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
     </style>
     
 </head>
@@ -31,7 +36,7 @@
                         <label for="email">이메일</label>
                         <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요">
                         <small class="form-text text-danger" id="email-error" style="display: none;">이미 가입된 이메일이에요🥲</small>
-                        <button type="button" class="btn btn-purple" id="email-verification-button">인증번호 발송</button>
+                        <button type="button" class="btn btn-purple" id="email-verification-button" disabled>인증번호 발송</button>
                     </div>
                     <div class="form-group">
                         <label for="authNum">인증번호</label>

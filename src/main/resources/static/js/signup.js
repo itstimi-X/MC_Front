@@ -60,6 +60,37 @@ document.getElementById('nickname').addEventListener('blur', function() {
     console.error('Error:', error);
   });
 });
+document.getElementById('email').addEventListener('blur', function() {
+  const email = this.value;
+  const apiEndpoint = 'https://localhost:8443/api/users/check-email/' + encodeURIComponent(email);
+  const errorElement = document.getElementById('email-error');
+  const emailVerificationButton = document.getElementById('email-verification-button');
+
+  }
+
+  fetch(apiEndpoint, {
+    method: 'GET',
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data) {
+      errorElement.textContent = "이미 가입된 이메일이에요🥲";
+      errorElement.style.display = 'block';
+      this.classList.add('is-invalid');
+      emailVerificationButton.disabled = true;
+      emailVerificationButton.classList.add('btn-disabled');
+    } else {
+      errorElement.style.display = 'none';
+      this.classList.remove('is-invalid');
+      emailVerificationButton.disabled = false;
+      emailVerificationButton.classList.remove('btn-disabled');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
+
 
 document.getElementById('email-verification-button').addEventListener('click', function(e) {
     e.preventDefault();
