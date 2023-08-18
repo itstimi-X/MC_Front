@@ -46,7 +46,7 @@ document.getElementById('nickname').addEventListener('blur', function() {
   })
   .then(response => response.json())
   .then(data => {
-    const errorElement = document.getElementById('nickname-error');
+    const errorElement = document.getElementById('nickname-duplicated');
 
     if (data) {
       errorElement.style.display = 'block';
