@@ -150,6 +150,33 @@ function isEmail(asValue) {
     return regExp.test(asValue); // 형식에 맞는 경우 true 리턴  
 }
 
+document.getElementById('authNum').addEventListener('input', function() {
+  const authNum = this.value;
+  const verifyButton = document.getElementById('verify-button');
+  const errorElement = document.getElementById('authNum-error');
+
+  // 6자리 정확하게 입력되었는지 확인
+  if (authNum.length === 6 && !isNaN(authNum)) {
+    verifyButton.disabled = false;
+    errorElement.style.display = 'none';
+    this.classList.remove('is-invalid');
+  } else {
+    verifyButton.disabled = true;
+  }
+});
+
+document.getElementById('authNum').addEventListener('blur', function() {
+  const authNum = this.value;
+  const errorElement = document.getElementById('authNum-error');
+
+  // 6자리가 아닌 경우 에러 메시지 표시
+  if (authNum.length !== 6 || isNaN(authNum)) {
+    errorElement.textContent = "6자리의 인증번호를 입력해주세요.";
+    errorElement.style.display = 'block';
+    this.classList.add('is-invalid');
+  }
+});
+
 document.getElementById('verify-button').addEventListener('click', function(e) {
   e.preventDefault();
   emailCertification();
