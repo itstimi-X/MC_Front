@@ -3,6 +3,7 @@
 <head>
     <title>회원가입</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .btn-purple {
           background-color: #D8BFD8; /* Thistle color (lighter purple) */
@@ -47,11 +48,29 @@
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
-                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <small id="passwordHelp" class="form-text">비밀번호는 최소 8자, 대문자, 소문자, 숫자를 각각 1개 이상 포함해야 합니다.</small>
+                        <div id="passwordMessage" class="text-danger"></div>
                     </div>
                     <div class="form-group">
                         <label for="password-confirm">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="password-confirm" placeholder="비밀번호를 다시 입력하세요">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password-confirm" placeholder="비밀번호를 다시 입력하세요" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <small id="confirmHelp" class="form-text">위에서 입력한 비밀번호와 동일하게 입력해주세요.</small>
+                        <div id="confirmMessage" class="text-danger"></div>
                     </div>
                     <button type="submit" class="btn btn-purple">회원가입</button>
                 </form>

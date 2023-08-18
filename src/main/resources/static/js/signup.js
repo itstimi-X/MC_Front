@@ -226,3 +226,51 @@ function emailCertification(){
   });
 }
 
+document.getElementById("password").addEventListener("blur", function() {
+  let password = document.getElementById("password").value;
+  let regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  if (regex.test(password)) {
+    document.getElementById("passwordMessage").textContent = "좋은 비밀번호입니다!";
+    document.getElementById("passwordMessage").className = "text-success";
+    document.getElementById("password-confirm").disabled = false;
+  } else {
+    document.getElementById("passwordMessage").textContent = "비밀번호가 규칙에 맞지 않습니다. 다시 입력해주세요.";
+    document.getElementById("passwordMessage").className = "text-danger";
+    document.getElementById("password-confirm").disabled = true;
+  }
+});
+
+document.getElementById("password-confirm").addEventListener("blur", function() {
+  let password = document.getElementById("password").value;
+  let confirmPassword = document.getElementById("password-confirm").value;
+  if (password === confirmPassword) {
+    document.getElementById("confirmMessage").textContent = "비밀번호가 일치합니다!";
+    document.getElementById("confirmMessage").className = "text-success";
+  } else {
+    document.getElementById("confirmMessage").textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
+    document.getElementById("confirmMessage").className = "text-danger";
+  }
+});
+document.getElementById("togglePassword").addEventListener("click", function() {
+  let passwordInput = document.getElementById("password");
+  let toggleButton = document.getElementById("togglePassword");
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggleButton.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+  } else {
+    passwordInput.type = "password";
+    toggleButton.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+  }
+});
+
+document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
+  let confirmPasswordInput = document.getElementById("password-confirm");
+  let toggleButton = document.getElementById("toggleConfirmPassword");
+  if (confirmPasswordInput.type === "password") {
+    confirmPasswordInput.type = "text";
+    toggleButton.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+  } else {
+    confirmPasswordInput.type = "password";
+    toggleButton.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+  }
+});
