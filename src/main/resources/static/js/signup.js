@@ -183,6 +183,9 @@ function emailCertification(){
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
       }
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      alert('인증 중 오류 발생: ' + (jqXHR.responseJSON && jqXHR.responseJSON.message) || textStatus);
     }
   });
 }
