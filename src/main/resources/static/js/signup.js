@@ -190,32 +190,3 @@ function emailCertification(){
   });
 }
 
-
-//   document.getElementById('email').addEventListener('blur', function() {
-//     const email = this.value;
-//     const apiEndpoint = 'https://myapi.com/check-email';
-  
-//     fetch(apiEndpoint, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ email })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       const errorElement = document.getElementById('email-error');
-  
-//       if (data.exists) {
-//         errorElement.style.display = 'block';
-//         this.classList.add('is-invalid');
-//       } else {
-//         errorElement.style.display = 'none';
-//         this.classList.remove('is-invalid');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//     });
-//   });
-  
