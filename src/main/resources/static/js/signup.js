@@ -66,6 +66,18 @@ document.getElementById('email').addEventListener('blur', function() {
   const errorElement = document.getElementById('email-error');
   const emailVerificationButton = document.getElementById('email-verification-button');
 
+  const isEmailFormat = (asValue) => {
+    const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return regExp.test(asValue);
+  };
+
+  if (!email || !isEmailFormat(email)) {
+    errorElement.textContent = "이메일 형식이 올바르지 않습니다. 다시 입력해주세요.";
+    errorElement.style.display = 'block';
+    this.classList.add('is-invalid');
+    emailVerificationButton.disabled = true;
+    emailVerificationButton.classList.add('btn-disabled');
+    return;
   }
 
   fetch(apiEndpoint, {
