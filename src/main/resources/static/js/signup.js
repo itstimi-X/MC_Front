@@ -103,7 +103,7 @@ function emailSend(){
 
     console.log('입력 이메일: ' + clientEmail);
 
-    if(emailYN == true) {
+    if(emailYN) {
         alert('이메일 형식입니다.');
 
         $.ajax({
@@ -161,7 +161,7 @@ function emailCertification(){
 
     success: function(result){
       console.log(result);
-      if(result == true) {
+      if(result) {
           alert('인증 성공');
           document.getElementById('certificationYN').value = true;
           clientEmail.onchange = function() {
