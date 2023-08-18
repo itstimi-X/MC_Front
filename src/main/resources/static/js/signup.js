@@ -37,6 +37,29 @@
 //         console.error('Error:', error);
 //     });
 // });
+document.getElementById('nickname').addEventListener('blur', function() {
+  const nickname = this.value;
+  const apiEndpoint = 'https://localhost:8443/api/users/check-username/' + encodeURIComponent(nickname);
+
+  fetch(apiEndpoint, {
+    method: 'GET',
+  })
+  .then(response => response.json())
+  .then(data => {
+    const errorElement = document.getElementById('nickname-error');
+
+    if (data) {
+      errorElement.style.display = 'block';
+      this.classList.add('is-invalid');
+    } else {
+      errorElement.style.display = 'none';
+      this.classList.remove('is-invalid');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
 
 document.getElementById('email-verification-button').addEventListener('click', function(e) {
     e.preventDefault();
@@ -121,34 +144,7 @@ function emailCertification(){
   });
 }
 
-// document.getElementById('nickname').addEventListener('blur', function() {
-//     const nickname = this.value;
-//     const apiEndpoint = 'https://myapi.com/check-username';
-  
-//     fetch(apiEndpoint, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ username: nickname })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       const errorElement = document.getElementById('username-error');
-  
-//       if (data.exists) {
-//         errorElement.style.display = 'block';
-//         this.classList.add('is-invalid');
-//       } else {
-//         errorElement.style.display = 'none';
-//         this.classList.remove('is-invalid');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//     });
-//   });
-  
+
 //   document.getElementById('email').addEventListener('blur', function() {
 //     const email = this.value;
 //     const apiEndpoint = 'https://myapi.com/check-email';
