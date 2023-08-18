@@ -112,8 +112,9 @@ document.getElementById('email-verification-button').addEventListener('click', f
 function emailSend(){
     let clientEmail = document.getElementById('email').value;
     let emailYN = isEmail(clientEmail);  // 이메일 형식이 맞는지 검사
+    const emailVerificationButton = document.getElementById('email-verification-button');
 
-    console.log('입력 이메일: ' + clientEmail);
+  console.log('입력 이메일: ' + clientEmail);
 
     if(emailYN) {
         alert('이메일 형식입니다.');
@@ -129,7 +130,10 @@ function emailSend(){
       
             success: function(data){
               if(data.status == 200) {
-                  alert('인증 코드가 전송되었습니다 ! 🥳');
+                  alert('인증 코드가 전송되었습니다 ! 🥳');// 버튼 텍스트 변경 및 비활성화
+                emailVerificationButton.textContent = "발송완료";
+                emailVerificationButton.disabled = true;
+                emailVerificationButton.classList.add('btn-disabled');
               } else {
                   // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
                   alert('이메일 전송 실패: ' + data.message);
