@@ -46,7 +46,7 @@ document.getElementById('nickname').addEventListener('blur', function() {
   })
   .then(response => response.json())
   .then(data => {
-    const errorElement = document.getElementById('nickname-error');
+    const errorElement = document.getElementById('nickname-duplicated');
 
     if (data) {
       errorElement.style.display = 'block';
@@ -60,6 +60,49 @@ document.getElementById('nickname').addEventListener('blur', function() {
     console.error('Error:', error);
   });
 });
+document.getElementById('email').addEventListener('blur', function() {
+  const email = this.value;
+  const apiEndpoint = 'https://localhost:8443/api/users/check-email/' + encodeURIComponent(email);
+  const errorElement = document.getElementById('email-error');
+  const emailVerificationButton = document.getElementById('email-verification-button');
+
+  const isEmailFormat = (asValue) => {
+    const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return regExp.test(asValue);
+  };
+
+  if (!email || !isEmailFormat(email)) {
+    errorElement.textContent = "이메일 형식이 올바르지 않습니다. 다시 입력해주세요.";
+    errorElement.style.display = 'block';
+    this.classList.add('is-invalid');
+    emailVerificationButton.disabled = true;
+    emailVerificationButton.classList.add('btn-disabled');
+    return;
+  }
+
+  fetch(apiEndpoint, {
+    method: 'GET',
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data) {
+      errorElement.textContent = "이미 가입된 이메일이에요🥲";
+      errorElement.style.display = 'block';
+      this.classList.add('is-invalid');
+      emailVerificationButton.disabled = true;
+      emailVerificationButton.classList.add('btn-disabled');
+    } else {
+      errorElement.style.display = 'none';
+      this.classList.remove('is-invalid');
+      emailVerificationButton.disabled = false;
+      emailVerificationButton.classList.remove('btn-disabled');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
+
 
 document.getElementById('email-verification-button').addEventListener('click', function(e) {
     e.preventDefault();
@@ -69,10 +112,11 @@ document.getElementById('email-verification-button').addEventListener('click', f
 function emailSend(){
     let clientEmail = document.getElementById('email').value;
     let emailYN = isEmail(clientEmail);  // 이메일 형식이 맞는지 검사
+    const emailVerificationButton = document.getElementById('email-verification-button');
 
-    console.log('입력 이메일: ' + clientEmail);
+  console.log('입력 이메일: ' + clientEmail);
 
-    if(emailYN == true) {
+    if(emailYN) {
         alert('이메일 형식입니다.');
 
         $.ajax({
@@ -86,7 +130,10 @@ function emailSend(){
       
             success: function(data){
               if(data.status == 200) {
-                  alert('인증 코드가 전송되었습니다 ! 🥳');
+                  alert('인증 코드가 전송되었습니다 ! 🥳');// 버튼 텍스트 변경 및 비활성화
+                emailVerificationButton.textContent = "발송완료";
+                emailVerificationButton.disabled = true;
+                emailVerificationButton.classList.add('btn-disabled');
               } else {
                   // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
                   alert('이메일 전송 실패: ' + data.message);
@@ -107,6 +154,33 @@ function isEmail(asValue) {
     return regExp.test(asValue); // 형식에 맞는 경우 true 리턴  
 }
 
+document.getElementById('authNum').addEventListener('input', function() {
+  const authNum = this.value;
+  const verifyButton = document.getElementById('verify-button');
+  const errorElement = document.getElementById('authNum-error');
+
+  // 6자리 정확하게 입력되었는지 확인
+  if (authNum.length === 6 && !isNaN(authNum)) {
+    verifyButton.disabled = false;
+    errorElement.style.display = 'none';
+    this.classList.remove('is-invalid');
+  } else {
+    verifyButton.disabled = true;
+  }
+});
+
+document.getElementById('authNum').addEventListener('blur', function() {
+  const authNum = this.value;
+  const errorElement = document.getElementById('authNum-error');
+
+  // 6자리가 아닌 경우 에러 메시지 표시
+  if (authNum.length !== 6 || isNaN(authNum)) {
+    errorElement.textContent = "6자리의 인증번호를 입력해주세요.";
+    errorElement.style.display = 'block';
+    this.classList.add('is-invalid');
+  }
+});
+
 document.getElementById('verify-button').addEventListener('click', function(e) {
   e.preventDefault();
   emailCertification();
@@ -115,6 +189,7 @@ document.getElementById('verify-button').addEventListener('click', function(e) {
 function emailCertification(){
   let clientEmail = document.getElementById('email').value;
   let authNum = document.getElementById('authNum').value;
+  const verifyButton = document.getElementById('verify-button');
 
   console.log('입력 이메일: ' + clientEmail);
   console.log('인증 코드: ' + authNum);
@@ -130,46 +205,24 @@ function emailCertification(){
 
     success: function(result){
       console.log(result);
-      if(result == true) {
+      if(result) {
           alert('인증 성공');
           document.getElementById('certificationYN').value = true;
           clientEmail.onchange = function() {
             document.getElementById('certificationYN').value = false;
           }
+        // 인증 완료 후 버튼 텍스트 변경 및 비활성화
+        verifyButton.textContent = "인증 완료";
+        verifyButton.disabled = true;
+        verifyButton.classList.add('btn-disabled');
       } else {
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
       }
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      alert('인증 중 오류 발생: ' + (jqXHR.responseJSON && jqXHR.responseJSON.message) || textStatus);
     }
   });
 }
 
-
-//   document.getElementById('email').addEventListener('blur', function() {
-//     const email = this.value;
-//     const apiEndpoint = 'https://myapi.com/check-email';
-  
-//     fetch(apiEndpoint, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ email })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       const errorElement = document.getElementById('email-error');
-  
-//       if (data.exists) {
-//         errorElement.style.display = 'block';
-//         this.classList.add('is-invalid');
-//       } else {
-//         errorElement.style.display = 'none';
-//         this.classList.remove('is-invalid');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//     });
-//   });
-  

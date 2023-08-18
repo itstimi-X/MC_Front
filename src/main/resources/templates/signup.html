@@ -13,6 +13,11 @@
           background-color: #C6AEC7; /* Darkened Thistle color when hovered */
           color: white;
         }
+        .btn-disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
     </style>
     
 </head>
@@ -25,17 +30,19 @@
                     <div class="form-group">
                         <label for="nickname">닉네임</label>
                         <input type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요">
-                        <small class="form-text text-danger" id="nickname-error" style="display: none;">이미 있는 닉네임이에요🥲</small>
+                        <small class="form-text text-danger" id="nickname-duplicated" style="display: none;">이미 있는 닉네임이에요🥲</small>
                     </div>
                     <div class="form-group">
                         <label for="email">이메일</label>
                         <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요">
-                        <button type="button" class="btn btn-purple" id="email-verification-button">인증번호 발송</button>
+                        <small class="form-text text-danger" id="email-error" style="display: none;">이미 가입된 이메일이에요🥲</small>
+                        <button type="button" class="btn btn-purple" id="email-verification-button" disabled>인증번호 발송</button>
                     </div>
                     <div class="form-group">
                         <label for="authNum">인증번호</label>
                         <input type="text" class="form-control" id="authNum" placeholder="인증번호를 입력하세요">
-                        <button type="button" class="btn btn-purple" id="verify-button">인증번호 확인</button>
+                        <div id="authNum-error" class="text-danger" style="display:none;"></div>
+                        <button type="button" class="btn btn-purple" id="verify-button" disabled>인증번호 확인</button>
                         <input type="hidden" id="certificationYN" value="false">
                     </div>
                     <div class="form-group">
