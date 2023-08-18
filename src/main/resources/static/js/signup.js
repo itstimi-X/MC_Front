@@ -185,6 +185,7 @@ document.getElementById('verify-button').addEventListener('click', function(e) {
 function emailCertification(){
   let clientEmail = document.getElementById('email').value;
   let authNum = document.getElementById('authNum').value;
+  const verifyButton = document.getElementById('verify-button');
 
   console.log('입력 이메일: ' + clientEmail);
   console.log('인증 코드: ' + authNum);
@@ -206,6 +207,10 @@ function emailCertification(){
           clientEmail.onchange = function() {
             document.getElementById('certificationYN').value = false;
           }
+        // 인증 완료 후 버튼 텍스트 변경 및 비활성화
+        verifyButton.textContent = "인증 완료";
+        verifyButton.disabled = true;
+        verifyButton.classList.add('btn-disabled');
       } else {
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
