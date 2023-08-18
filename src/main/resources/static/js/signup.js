@@ -39,7 +39,7 @@
 // });
 document.getElementById('nickname').addEventListener('blur', function() {
   const nickname = this.value;
-  const apiEndpoint = 'https://localhost:8443/api/users/check-username/' + encodeURIComponent(nickname);
+  const apiEndpoint = 'https://localhost:8443/api/users/check-nickname/' + encodeURIComponent(nickname);
 
   fetch(apiEndpoint, {
     method: 'GET',
