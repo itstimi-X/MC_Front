@@ -191,6 +191,9 @@ function emailCertification(){
         // 인증 완료 후 인증번호 입력창 비활성화
         document.getElementById('authNum').disabled = true;
 
+        // 인증 완료 후 비밀번호 입력창 활성화
+        document.getElementById('password').disabled = false;
+
       } else {
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
