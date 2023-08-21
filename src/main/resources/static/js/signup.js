@@ -176,6 +176,7 @@ function emailCertification(){
     success: function(result){
       console.log(result);
       if(result) {
+
           alert('인증 성공');
           document.getElementById('certificationYN').value = true;
           clientEmail.onchange = function() {
@@ -185,6 +186,10 @@ function emailCertification(){
         verifyButton.textContent = "인증 완료";
         verifyButton.disabled = true;
         verifyButton.classList.add('btn-disabled');
+
+        // 인증 완료 후 인증번호 입력창 비활성화
+        document.getElementById('authNum').disabled = true;
+
       } else {
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
