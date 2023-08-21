@@ -1,42 +1,3 @@
-// document.getElementById('signup-form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//
-//     const username = document.getElementById('username').value;
-//     const email = document.getElementById('email').value;
-//     const password = document.getElementById('password').value;
-//     const passwordConfirm = document.getElementById('password-confirm').value;
-//
-//     if (password !== passwordConfirm) {
-//         alert('비밀번호가 일치하지 않습니다.');
-//         return;
-//     }
-//
-//     const data = {
-//         username: username,
-//         email: email,
-//         password: password
-//     };
-//
-//     fetch('/signup', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             alert('회원가입 성공');
-//             window.location.href = '/login';
-//         } else {
-//             alert('회원가입 실패');
-//         }
-//     })
-//     .catch((error) => {
-//         console.error('Error:', error);
-//     });
-// });
 document.getElementById('nickname').addEventListener('blur', function() {
   const nickname = this.value;
   const apiEndpoint = 'https://localhost:8443/api/users/check-nickname/' + encodeURIComponent(nickname);
@@ -106,7 +67,16 @@ document.getElementById('email').addEventListener('blur', function() {
 
 document.getElementById('email-verification-button').addEventListener('click', function(e) {
     e.preventDefault();
-    emailSend();
+
+  // 인증번호 입력창 활성화
+  document.getElementById('authNum').disabled = false;
+
+  // 이메일 입력창 비활성화
+  document.getElementById('email').disabled = true;
+
+  // 이메일 발송 함수 호출
+  emailSend();
+
 });
 
 function emailSend(){
@@ -130,10 +100,11 @@ function emailSend(){
       
             success: function(data){
               if(data.status == 200) {
-                  alert('인증 코드가 전송되었습니다 ! 🥳');// 버튼 텍스트 변경 및 비활성화
-                emailVerificationButton.textContent = "발송완료";
-                emailVerificationButton.disabled = true;
-                emailVerificationButton.classList.add('btn-disabled');
+                  alert('인증 코드가 전송되었습니다 ! 🥳');
+                  // 버튼 텍스트 변경 및 비활성화
+                  emailVerificationButton.textContent = "발송완료";
+                  emailVerificationButton.disabled = true;
+                  emailVerificationButton.classList.add('btn-disabled');
               } else {
                   // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
                   alert('이메일 전송 실패: ' + data.message);
@@ -206,6 +177,7 @@ function emailCertification(){
     success: function(result){
       console.log(result);
       if(result) {
+
           alert('인증 성공');
           document.getElementById('certificationYN').value = true;
           clientEmail.onchange = function() {
@@ -215,6 +187,13 @@ function emailCertification(){
         verifyButton.textContent = "인증 완료";
         verifyButton.disabled = true;
         verifyButton.classList.add('btn-disabled');
+
+        // 인증 완료 후 인증번호 입력창 비활성화
+        document.getElementById('authNum').disabled = true;
+
+        // 인증 완료 후 비밀번호 입력창 활성화
+        document.getElementById('password').disabled = false;
+
       } else {
           // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
           alert('인증 실패: ' + result.message);
@@ -246,6 +225,12 @@ document.getElementById("password-confirm").addEventListener("blur", function() 
   if (password === confirmPassword) {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치합니다!";
     document.getElementById("confirmMessage").className = "text-success";
+    // 비밀번호와 비밀번호 확인 입력창 비활성화
+    document.getElementById("password").disabled = true;
+    document.getElementById("password-confirm").disabled = true;
+
+    // 비밀번호 일치 시 회원가입 버튼 활성화
+    document.getElementById("signup-button").disabled = false;
   } else {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
     document.getElementById("confirmMessage").className = "text-danger";
@@ -274,3 +259,35 @@ document.getElementById("toggleConfirmPassword").addEventListener("click", funct
     toggleButton.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
   }
 });
+
+document.getElementById('signup-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  signUp();
+});
+
+function signUp(){
+  let nickname = document.getElementById('nickname').value;
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+
+  console.log('닉네임: ' + nickname);
+  console.log('이메일: ' + email);
+  console.log('비밀번호: ' + password);
+
+  $.ajax({
+    type:"POST",
+    url:"https://localhost:8443/api/users/sign-up",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify({nickname: nickname, email: email, password: password}),
+
+    success: function(response){
+      console.log(response);
+      alert('회원가입 성공');
+      // window.location.href = '/'; // 회원가입 성공 후 메인 페이지로 이동
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      alert('회원가입 중 오류 발생: ' + (jqXHR.responseJSON && jqXHR.responseJSON.message) || textStatus);
+    }
+  });
+}
+
