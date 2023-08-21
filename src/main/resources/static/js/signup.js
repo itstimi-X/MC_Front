@@ -100,10 +100,11 @@ function emailSend(){
       
             success: function(data){
               if(data.status == 200) {
-                  alert('인증 코드가 전송되었습니다 ! 🥳');// 버튼 텍스트 변경 및 비활성화
-                emailVerificationButton.textContent = "발송완료";
-                emailVerificationButton.disabled = true;
-                emailVerificationButton.classList.add('btn-disabled');
+                  alert('인증 코드가 전송되었습니다 ! 🥳');
+                  // 버튼 텍스트 변경 및 비활성화
+                  emailVerificationButton.textContent = "발송완료";
+                  emailVerificationButton.disabled = true;
+                  emailVerificationButton.classList.add('btn-disabled');
               } else {
                   // 추가: 서버로부터의 오류 메시지를 사용하여 문제를 알림
                   alert('이메일 전송 실패: ' + data.message);
@@ -224,6 +225,9 @@ document.getElementById("password-confirm").addEventListener("blur", function() 
     // 비밀번호와 비밀번호 확인 입력창 비활성화
     document.getElementById("password").disabled = true;
     document.getElementById("password-confirm").disabled = true;
+
+    // 비밀번호 일치 시 회원가입 버튼 활성화
+    document.getElementById("signup-button").disabled = false;
   } else {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
     document.getElementById("confirmMessage").className = "text-danger";
