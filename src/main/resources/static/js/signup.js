@@ -274,3 +274,35 @@ document.getElementById("toggleConfirmPassword").addEventListener("click", funct
     toggleButton.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
   }
 });
+
+document.getElementById('signup-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  signUp();
+});
+
+function signUp(){
+  let nickname = document.getElementById('nickname').value;
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+
+  console.log('닉네임: ' + nickname);
+  console.log('이메일: ' + email);
+  console.log('비밀번호: ' + password);
+
+  $.ajax({
+    type:"POST",
+    url:"https://localhost:8443/api/users/sign-up",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify({nickname: nickname, email: email, password: password}),
+
+    success: function(response){
+      console.log(response);
+      alert('회원가입 성공');
+      // window.location.href = '/'; // 회원가입 성공 후 메인 페이지로 이동
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      alert('회원가입 중 오류 발생: ' + (jqXHR.responseJSON && jqXHR.responseJSON.message) || textStatus);
+    }
+  });
+}
+
