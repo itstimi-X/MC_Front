@@ -71,6 +71,9 @@ document.getElementById('email-verification-button').addEventListener('click', f
   // 인증번호 입력창 활성화
   document.getElementById('authNum').disabled = false;
 
+  // 이메일 입력창 비활성화
+  document.getElementById('email').disabled = true;
+
   // 이메일 발송 함수 호출
   emailSend();
 
