@@ -221,6 +221,9 @@ document.getElementById("password-confirm").addEventListener("blur", function() 
   if (password === confirmPassword) {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치합니다!";
     document.getElementById("confirmMessage").className = "text-success";
+    // 비밀번호와 비밀번호 확인 입력창 비활성화
+    document.getElementById("password").disabled = true;
+    document.getElementById("password-confirm").disabled = true;
   } else {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
     document.getElementById("confirmMessage").className = "text-danger";
