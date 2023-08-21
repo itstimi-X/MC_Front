@@ -67,7 +67,13 @@ document.getElementById('email').addEventListener('blur', function() {
 
 document.getElementById('email-verification-button').addEventListener('click', function(e) {
     e.preventDefault();
-    emailSend();
+
+  // 인증번호 입력창 활성화
+  document.getElementById('authNum').disabled = false;
+
+  // 이메일 발송 함수 호출
+  emailSend();
+
 });
 
 function emailSend(){
