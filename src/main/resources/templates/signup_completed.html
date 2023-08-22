@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 완료</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .header {
+            width: 364px;
+            height: 119px;
+            padding-bottom: 55px;
+            position: relative;
+            background: white;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .header-content {
+            padding-left: 24px;
+            padding-right: 201px;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .title {
+            color: black;
+            font-size: 20px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .message {
+            width: 214px;
+            height: 109px;
+            position: relative;
+            text-align: center;
+            color: #1C1C1C;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 32px;
+            word-wrap: break-word;
+        }
+
+        .login-button {
+            padding: 16px 60px;
+            position: relative;
+            background: #16133A;
+            border-radius: 8px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-text {
+            width: 199px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+        .btn-purple {
+            background-color: #D8BFD8; /* Thistle color (lighter purple) */
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #C6AEC7; /* Darkened Thistle color when hovered */
+            color: white;
+        }
+        .btn-disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <div class="title">MBTI_Collector</div>
+        </div>
+    </div>
+    <div class="message">
+        회원가입을 완료했습니다.
+    </div>
+    <div class="login-button" onclick="window.location.href='/login'">
+        <div class="login-text">로그인 하러가기</div>
+    </div>
+</div>
+</body>
+</html>
