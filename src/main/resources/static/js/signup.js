@@ -7,7 +7,7 @@ document.getElementById('nickname').addEventListener('blur', function() {
   })
   .then(response => response.json())
   .then(data => {
-    const errorElement = document.getElementById('nickname-duplicated');
+    const errorElement = document.getElementById('nickname-error');
 
     if (data) {
       errorElement.style.display = 'block';
@@ -229,8 +229,6 @@ document.getElementById("password-confirm").addEventListener("blur", function() 
     document.getElementById("password").disabled = true;
     document.getElementById("password-confirm").disabled = true;
 
-    // 비밀번호 일치 시 회원가입 버튼 활성화
-    document.getElementById("signup-button").disabled = false;
   } else {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
     document.getElementById("confirmMessage").className = "text-danger";
