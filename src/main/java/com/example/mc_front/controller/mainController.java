@@ -10,4 +10,14 @@ public class mainController {
     public String signUp() {
         return "signup";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/sign-up-completed")
+    public String signUpCompleted() {
+        return "signup_completed";
+    }
 }
