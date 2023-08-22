@@ -282,7 +282,7 @@ function signUp(){
     success: function(response){
       console.log(response);
       alert('회원가입 성공');
-      // window.location.href = '/'; // 회원가입 성공 후 메인 페이지로 이동
+      window.location.href = '/sign-up-completed';
     },
     error: function(jqXHR, textStatus, errorThrown){
       alert('회원가입 중 오류 발생: ' + (jqXHR.responseJSON && jqXHR.responseJSON.message) || textStatus);
