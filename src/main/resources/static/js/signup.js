@@ -222,6 +222,7 @@ document.getElementById("password").addEventListener("blur", function() {
 document.getElementById("password-confirm").addEventListener("blur", function() {
   let password = document.getElementById("password").value;
   let confirmPassword = document.getElementById("password-confirm").value;
+
   if (password === confirmPassword) {
     document.getElementById("confirmMessage").textContent = "비밀번호가 일치합니다!";
     document.getElementById("confirmMessage").className = "text-success";
@@ -288,4 +289,29 @@ function signUp(){
     }
   });
 }
+
+// 입력 필드들의 상태를 확인하고 회원가입 버튼의 활성화 상태를 결정하는 함수
+function checkFields() {
+
+  let nickname = document.getElementById('nickname').value;
+  let email = document.getElementById('email').value;
+  let authNum = document.getElementById('authNum').value;
+  let password = document.getElementById('password').value;
+  let confirmPassword = document.getElementById('password-confirm').value;
+
+  // 모든 필드가 채워져 있으며, 비밀번호와 비밀번호 확인 값이 일치하면 회원가입 버튼 활성화
+  if (email && authNum && password && confirmPassword && nickname && password === confirmPassword) {
+    document.getElementById('signup-button').disabled = false;
+  } else {
+    document.getElementById('signup-button').disabled = true;
+  }
+
+}
+
+// 모든 입력 필드에 'input' 이벤트 리스너 추가하여 값이 변경될 때마다 checkFields 함수 호출
+document.getElementById('nickname').addEventListener('input', checkFields);
+document.getElementById('email').addEventListener('input', checkFields);
+document.getElementById('authNum').addEventListener('input', checkFields);
+document.getElementById('password').addEventListener('input', checkFields);
+document.getElementById('password-confirm').addEventListener('input', checkFields);
 
