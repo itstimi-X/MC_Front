@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 기록하기</title>
+  <style>
+    .input-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+<h1>MBTI 기록하기</h1>
+
+<div class="input-group">
+  E: <input type="number" id="E" onblur="calculateValue('E', 'I')">
+  I: <input type="number" id="I" onblur="calculateValue('I', 'E')">
+</div>
+<div class="input-group">
+  N: <input type="number" id="N" onblur="calculateValue('N', 'S')">
+  S: <input type="number" id="S" onblur="calculateValue('S', 'N')">
+</div>
+<div class="input-group">
+  T: <input type="number" id="T" onblur="calculateValue('T', 'F')">
+  F: <input type="number" id="F" onblur="calculateValue('F', 'T')">
+</div>
+<div class="input-group">
+  J: <input type="number" id="J" onblur="calculateValue('J', 'P')">
+  P: <input type="number" id="P" onblur="calculateValue('P', 'J')">
+</div>
+
+<button id="saveBtn" onclick="saveMBTI()" disabled>저장하기</button>
+<script th:src="@{/static/js/mbti_record.js}" ></script>
+</body>
+</html>
