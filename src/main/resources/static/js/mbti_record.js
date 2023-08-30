@@ -36,11 +36,17 @@ function saveMBTI() {
       'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(data),
-  }).then(response => response.json())
+  })
+  .then(response => response.json())
   .then(data => {
-    console.log('Success:', data);
+    if (data.success) {
+      alert(data.message); // 성공시 alert 메시지 표시
+    } else {
+      alert(data.message); // 실패시 alert 메시지 표시 (예: "Invalid Access Token")
+    }
   })
   .catch((error) => {
     console.error('Error:', error);
+    alert('요청 처리 중 오류가 발생했습니다.'); // 네트워크 오류나 기타 예외적인 상황에 대한 메시지
   });
 }
