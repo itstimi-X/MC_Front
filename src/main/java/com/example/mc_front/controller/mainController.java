@@ -20,4 +20,9 @@ public class mainController {
     public String signUpCompleted() {
         return "signup_completed";
     }
+
+    @GetMapping("/mbti-record")
+    public String mbtiRecord() {
+        return "mbti_record";
+    }
 }
