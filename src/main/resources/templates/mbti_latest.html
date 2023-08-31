@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /* 스타일링 */
+    .mbti-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mbti-tab {
+      display: flex;
+      justify-content: space-between;
+
+    }
+    .active-tab {
+      border-bottom: 2px solid #1C1C1C;
+      color: #1C1C1C;
+      flex: 1; /* 화면 가로의 절반씩 차지 */
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      align-items: center; /* 중앙 정렬 */
+      font-size: 20px;
+      padding: 10px 0; /* 위아래로 10px 마진값 추가 */
+    }
+
+    .inactive-tab {
+      color: #999999;
+      flex: 1; /* 화면 가로의 절반씩 차지 */
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      align-items: center; /* 중앙 정렬 */
+      font-size: 20px;
+      padding: 10px 0; /* 위아래로 10px 마진값 추가 */
+    }
+
+
+    .mbti-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .filled {
+      background-color: #3A8DFF;
+      height: 100%;
+      width: 0%; /* 초기 width 값을 0%로 설정 */
+    }
+
+    .label {
+      font-family: Noto Sans KR;
+      position: relative;
+    }
+
+    .label.left {
+      left: 0;
+    }
+
+    .label.right {
+      right: 0;
+    }
+
+    .percentage {
+      font-size: 12px;
+    }
+
+    .type {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .bar-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      height: 5px;
+      background-color: #E0E0E0;
+      position: relative;
+      width: 200px;
+      margin: 0 20px; /* 여기 값을 조절하세요. */
+    }
+    .filled.i-bar, .filled.s-bar, .filled.f-bar, .filled.p-bar {
+      position: absolute;
+      right: 0;
+    }
+    .new-mbti-btn {
+      width: 100%;
+      height: 100%;
+      padding: 16px 60px;
+      background: #16133A;
+      border-radius: 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      display: inline-flex;
+    }
+
+    .new-mbti-text {
+      width: 199px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      font-family: Noto Sans KR;
+      font-weight: 500;
+      word-wrap: break-word;
+    }
+
+    .mbti-date {
+      margin-top: 20px; /* 위쪽 마진값 설정 */
+    }
+
+    .mbti-result {
+      margin-top: 20px; /* 위쪽 마진값 설정 */
+      font-size: 24px; /* 글씨 크기 설정 */
+      font-weight: bold; /* 굵은 글씨로 설정 */
+      text-align: center; /* 중앙 정렬 설정 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="mbti-display">
+  <div class="mbti-tab">
+    <div class="active-tab">최근 MBTI</div>
+    <div class="inactive-tab">MBTI 변화 그래프</div>
+  </div>
+  <div class="mbti-date"></div>
+  <div class="mbti-result"></div>
+
+  <!-- MBTI E/I Line -->
+  <div class="mbti-line">
+    <div class="label left">
+      <div class="type">E</div>
+      <div>외향형</div>
+      <div class="percentage" id="e-percentage"></div>
+    </div>
+    <div class="bar-container">
+      <div class="filled e-bar"></div>
+      <div class="filled i-bar"></div>
+    </div>
+    <div class="label right">
+      <div class="type">I</div>
+      <div>내향형</div>
+      <div class="percentage" id="i-percentage"></div>
+    </div>
+  </div>
+
+  <!-- MBTI N/S Line -->
+  <div class="mbti-line">
+    <div class="label left">
+      <div class="type">N</div>
+      <div>직관형</div>
+      <div class="percentage" id="n-percentage"></div>
+    </div>
+    <div class="bar-container">
+      <div class="filled n-bar"></div>
+      <div class="filled s-bar"></div>
+    </div>
+    <div class="label right">
+      <div class="type">S</div>
+      <div>감각형</div>
+      <div class="percentage" id="s-percentage"></div>
+    </div>
+  </div>
+
+  <!-- MBTI T/F Line -->
+  <div class="mbti-line">
+    <div class="label left">
+      <div class="type">T</div>
+      <div>사고형</div>
+      <div class="percentage" id="t-percentage"></div>
+    </div>
+    <div class="bar-container">
+      <div class="filled t-bar"></div>
+      <div class="filled f-bar"></div>
+    </div>
+    <div class="label right">
+      <div class="type">F</div>
+      <div>감정형</div>
+      <div class="percentage" id="f-percentage"></div>
+    </div>
+  </div>
+
+  <!-- MBTI J/P Line -->
+  <div class="mbti-line">
+    <div class="label left">
+      <div class="type">J</div>
+      <div>판단형</div>
+      <div class="percentage" id="j-percentage"></div>
+    </div>
+    <div class="bar-container">
+      <div class="filled j-bar"></div>
+      <div class="filled p-bar"></div>
+    </div>
+    <div class="label right">
+      <div class="type">P</div>
+      <div>인식형</div>
+      <div class="percentage" id="p-percentage"></div>
+    </div>
+  </div>
+  <div class="no-mbti-message" style="display: none; text-align: center; color: #333; font-family: Noto Sans KR; font-weight: 500; margin-top: 20px;">
+    등록된 기록이 없습니다! MBTI를 등록해주세요.
+  </div>
+  <div class="new-mbti-btn">
+    <div class="new-mbti-text">+ 새로운 <br/>MBTI 기록하기</div>
+  </div>
+
+</div>
+<script th:src="@{/static/js/mbti_latest.js}"></script>
+</body>
+</html>

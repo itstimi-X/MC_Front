@@ -25,4 +25,9 @@ public class mainController {
     public String mbtiRecord() {
         return "mbti_record";
     }
+
+    @GetMapping("/mbti-latest")
+    public String mbtiLatest() {
+        return "mbti_latest";
+    }
 }

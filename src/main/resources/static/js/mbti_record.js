@@ -1,6 +1,13 @@
 function calculateValue(input1, input2) {
   let value1 = document.getElementById(input1).value;
+
   if (value1) {
+    if (value1 < 0 || value1 > 100) {
+      alert("값은 0에서 100 사이여야 합니다.");
+      document.getElementById(input1).value = "";
+      return;
+    }
+
     let value2 = 100 - value1;
     document.getElementById(input2).value = value2;
     document.getElementById(input1).disabled = true;
@@ -41,6 +48,7 @@ function saveMBTI() {
   .then(data => {
     if (data.success) {
       alert(data.message); // 성공시 alert 메시지 표시
+      window.location.href = '/mbti-latest'; // mbti 결과 페이지로 이동
     } else {
       alert(data.message); // 실패시 alert 메시지 표시 (예: "Invalid Access Token")
     }
