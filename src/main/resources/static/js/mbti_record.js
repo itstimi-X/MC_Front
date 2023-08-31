@@ -48,6 +48,7 @@ function saveMBTI() {
   .then(data => {
     if (data.success) {
       alert(data.message); // 성공시 alert 메시지 표시
+      window.location.href = '/mbti-latest'; // mbti 결과 페이지로 이동
     } else {
       alert(data.message); // 실패시 alert 메시지 표시 (예: "Invalid Access Token")
     }
