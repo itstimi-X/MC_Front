@@ -1,6 +1,13 @@
 function calculateValue(input1, input2) {
   let value1 = document.getElementById(input1).value;
+
   if (value1) {
+    if (value1 < 0 || value1 > 100) {
+      alert("값은 0에서 100 사이여야 합니다.");
+      document.getElementById(input1).value = "";
+      return;
+    }
+
     let value2 = 100 - value1;
     document.getElementById(input2).value = value2;
     document.getElementById(input1).disabled = true;
