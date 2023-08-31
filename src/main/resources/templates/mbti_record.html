@@ -36,7 +36,7 @@
     }
 
     input[type="number"]:not(:last-child) {
-      margin-right: 20px;  /* 우측에 여백 추가 */
+      margin-right: 10px;  /* 우측에 여백 추가 */
     }
 
 
@@ -82,20 +82,20 @@
 <h1>MBTI 기록하기</h1>
 
 <div class="input-group">
-  <label for="E">E:</label> <input type="number" id="E" onblur="calculateValue('E', 'I')">
-  <label for="I">I:</label> <input type="number" id="I" onblur="calculateValue('I', 'E')">
+  <label for="E">E:</label> <input type="number" id="E" onblur="calculateValue('E', 'I')">%
+  <label for="I">I:</label> <input type="number" id="I" onblur="calculateValue('I', 'E')">  %
 </div>
 <div class="input-group">
-  <label for="N">N:</label> <input type="number" id="N" onblur="calculateValue('N', 'S')">
-  <label for="S">S:</label> <input type="number" id="S" onblur="calculateValue('S', 'N')">
+  <label for="N">N:</label> <input type="number" id="N" onblur="calculateValue('N', 'S')">%
+  <label for="S">S:</label> <input type="number" id="S" onblur="calculateValue('S', 'N')">  %
 </div>
 <div class="input-group">
-  <label for="T">T:</label> <input type="number" id="T" onblur="calculateValue('T', 'F')">
-  <label for="F">F:</label> <input type="number" id="F" onblur="calculateValue('F', 'T')">
+  <label for="T">T:</label> <input type="number" id="T" onblur="calculateValue('T', 'F')">%
+  <label for="F">F:</label> <input type="number" id="F" onblur="calculateValue('F', 'T')">  %
 </div>
 <div class="input-group">
-  <label for="J">J:</label> <input type="number" id="J" onblur="calculateValue('J', 'P')">
-  <label for="P">P:</label> <input type="number" id="P" onblur="calculateValue('P', 'J')">
+  <label for="J">J:</label> <input type="number" id="J" onblur="calculateValue('J', 'P')">%
+  <label for="P">P:</label> <input type="number" id="P" onblur="calculateValue('P', 'J')">  %
 </div>
 
 <button id="saveBtn" onclick="saveMBTI()" disabled>저장하기</button>
