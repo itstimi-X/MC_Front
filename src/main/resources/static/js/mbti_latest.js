@@ -109,3 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelector('.new-mbti-btn').addEventListener('click', function() {
   window.location.href = "/mbti-record";
 });
+
+document.querySelector('.inactive-tab').addEventListener('click', function() {
+  window.location.href = '/mbti-chart';
+});
