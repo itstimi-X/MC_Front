@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 변화 그래프</title>
+  <style>
+    /* 스타일링 */
+    .mbti-tab {
+      display: flex;
+      justify-content: space-between;
+
+    }
+    .active-tab {
+      border-bottom: 2px solid #1C1C1C;
+      color: #1C1C1C;
+      flex: 1; /* 화면 가로의 절반씩 차지 */
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      align-items: center; /* 중앙 정렬 */
+      font-size: 20px;
+      padding: 10px 0; /* 위아래로 10px 마진값 추가 */
+    }
+
+    .inactive-tab {
+      color: #999999;
+      flex: 1; /* 화면 가로의 절반씩 차지 */
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      align-items: center; /* 중앙 정렬 */
+      font-size: 20px;
+      padding: 10px 0; /* 위아래로 10px 마진값 추가 */
+    }
+
+    .new-mbti-btn {
+      width: 100%;
+      height: 100%;
+      padding: 16px 60px;
+      background: #16133A;
+      border-radius: 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      display: inline-flex;
+    }
+
+    .new-mbti-text {
+      width: 199px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      font-family: Noto Sans KR;
+      font-weight: 500;
+      word-wrap: break-word;
+    }
+
+    .chart-container {
+      width: 50%; /* 차트의 크기를 절반으로 줄임 */
+      margin: 0 auto; /* 중앙 정렬 */
+      margin-top: 50px; /* 위쪽 마진 추가 */
+      margin-bottom: 50px; /* 아래쪽 마진 추가 */
+    }
+
+    #mbtiChart {
+      max-width: 100%; /* 차트가 컨테이너보다 크지 않도록 설정 */
+      height: auto; /* 높이를 자동으로 설정 */
+    }
+
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
+
+<body>
+<div class="mbti-tab">
+  <div class="inactive-tab">최근 MBTI</div>
+  <div class="active-tab">MBTI 변화 그래프</div>
+</div>
+
+<div class="chart-container">
+  <canvas id="mbtiChart" width="400" height="400"></canvas>
+</div>
+
+<div class="new-mbti-btn">
+  <div class="new-mbti-text">+ 새로운 <br/>MBTI 기록하기</div>
+</div>
+<script th:src="@{/static/js/mbtiChart.js}"></script>
+</body>
+
+</html>
