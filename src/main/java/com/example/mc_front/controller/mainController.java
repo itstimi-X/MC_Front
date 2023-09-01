@@ -30,4 +30,9 @@ public class mainController {
     public String mbtiLatest() {
         return "mbti_latest";
     }
+
+    @GetMapping("/mbti-chart")
+    public String mbtiChart() {
+        return "mbti_chart";
+    }
 }
