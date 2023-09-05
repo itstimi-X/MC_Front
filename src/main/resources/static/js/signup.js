@@ -1,6 +1,6 @@
 document.getElementById('nickname').addEventListener('blur', function() {
   const nickname = this.value;
-  const apiEndpoint = 'https://localhost:8443/api/users/check-nickname/' + encodeURIComponent(nickname);
+  const apiEndpoint = 'https://13.125.206.124:8443/api/users/check-nickname/' + encodeURIComponent(nickname);
 
   fetch(apiEndpoint, {
     method: 'GET',
@@ -23,7 +23,7 @@ document.getElementById('nickname').addEventListener('blur', function() {
 });
 document.getElementById('email').addEventListener('blur', function() {
   const email = this.value;
-  const apiEndpoint = 'https://localhost:8443/api/users/check-email/' + encodeURIComponent(email);
+  const apiEndpoint = 'https://13.125.206.124:8443/api/users/check-email/' + encodeURIComponent(email);
   const errorElement = document.getElementById('email-error');
   const emailVerificationButton = document.getElementById('email-verification-button');
 
@@ -91,7 +91,7 @@ function emailSend(){
 
         $.ajax({
             type:"POST",
-            url:"https://localhost:8443/api/email-verification/send",   //컨트롤러에서 받을 url
+            url:"https://13.125.206.124:8443/api/email-verification/send",   //컨트롤러에서 받을 url
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({email: clientEmail}), // JSON 형태로 데이터 전송
             xhrFields: {
@@ -167,7 +167,7 @@ function emailCertification(){
 
   $.ajax({
     type:"POST",
-    url:"https://localhost:8443/api/email-verification/check",   //컨트롤러에서 받을 url
+    url:"https://13.125.206.124:8443/api/email-verification/check",   //컨트롤러에서 받을 url
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify({email: clientEmail, authNum: authNum}), // JSON 형태로 데이터 전송
     xhrFields: {
@@ -275,7 +275,7 @@ function signUp(){
 
   $.ajax({
     type:"POST",
-    url:"https://localhost:8443/api/users/sign-up",
+    url:"https://13.125.206.124:8443/api/users/sign-up",
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify({nickname: nickname, email: email, password: password}),
 

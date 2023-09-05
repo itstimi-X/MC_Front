@@ -36,7 +36,7 @@ function saveMBTI() {
 
   const token = localStorage.getItem('token');
 
-  fetch('https://localhost:8443/api/mbti/save', {
+  fetch('https://13.125.206.124:8443/api/mbti/save', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

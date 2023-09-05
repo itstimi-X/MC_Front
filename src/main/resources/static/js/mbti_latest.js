@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const token = localStorage.getItem('token');
 
   // MBTI 데이터 가져오기
-  fetch('https://localhost:8443/api/mbti/latest', {
+  fetch('https://13.125.206.124:8443/api/mbti/latest', {
     method: 'POST',
     headers: {
       'Authorization': 'Bearer ' + token

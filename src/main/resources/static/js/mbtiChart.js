@@ -1,6 +1,6 @@
 // 서버에서 데이터를 가져오는 함수
 async function fetchData() {
-  const url = 'https://localhost:8443/api/mbti/chart';
+  const url = 'https://13.125.206.124:8443/api/mbti/chart';
   const token = localStorage.getItem('token');  // 로컬 스토리지에서 토큰 가져오기
 
   const response = await fetch(url, {

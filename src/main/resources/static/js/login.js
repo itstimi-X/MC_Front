@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", function () {
       password: password
     };
 
-    fetch("https://localhost:8443/api/users/login", {
+    fetch("https://13.125.206.124:8443/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
